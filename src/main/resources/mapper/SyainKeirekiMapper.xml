@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.SyainKeirekiMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.model.SyainKeireki">
+    <id column="SYAIN_ID" jdbcType="INTEGER" property="syainId" />
+    <id column="KAISIBI" jdbcType="DATE" property="kaisibi" />
+    <result column="SYURYOBI" jdbcType="DATE" property="syuryobi" />
+    <result column="PJ_NAME" jdbcType="VARCHAR" property="pjName" />
+    <result column="TAINITI_FLAG" jdbcType="INTEGER" property="tainitiFlag" />
+    <result column="BASYO" jdbcType="INTEGER" property="basyo" />
+    <result column="KIBO" jdbcType="INTEGER" property="kibo" />
+    <result column="GYOSYU" jdbcType="INTEGER" property="gyosyu" />
+    <result column="KAIHATUKANKYO" jdbcType="INTEGER" property="kaihatukankyo" />
+    <result column="UNYOUKANKYO" jdbcType="INTEGER" property="unyoukankyo" />
+    <result column="GENGO" jdbcType="VARCHAR" property="gengo" />
+    <result column="DB" jdbcType="VARCHAR" property="db" />
+    <result column="TOOL" jdbcType="VARCHAR" property="tool" />
+    <result column="TANTOU" jdbcType="INTEGER" property="tantou" />
+    <result column="SAGYOHANI" jdbcType="CHAR" property="sagyohani" />
+    <result column="GAIYOU" jdbcType="VARCHAR" property="gaiyou" />
+    <result column="TOUROKUBI" jdbcType="TIMESTAMP" property="tourokubi" />
+    <result column="KOUSINNBI" jdbcType="TIMESTAMP" property="kousinnbi" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SYAIN_ID, KAISIBI, SYURYOBI, PJ_NAME, TAINITI_FLAG, BASYO, KIBO, GYOSYU, KAIHATUKANKYO, 
+    UNYOUKANKYO, GENGO, DB, TOOL, TANTOU, SAGYOHANI, GAIYOU, TOUROKUBI, KOUSINNBI
+  </sql>
+  <select id="selectByExample" parameterType="com.lxm.model.SyainKeirekiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from syain_keireki
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.lxm.model.SyainKeirekiKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syain_keireki
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lxm.model.SyainKeirekiKey">
+    delete from syain_keireki
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxm.model.SyainKeirekiExample">
+    delete from syain_keireki
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxm.model.SyainKeireki">
+    insert into syain_keireki (SYAIN_ID, KAISIBI, SYURYOBI, 
+      PJ_NAME, TAINITI_FLAG, BASYO, 
+      KIBO, GYOSYU, KAIHATUKANKYO, 
+      UNYOUKANKYO, GENGO, DB, 
+      TOOL, TANTOU, SAGYOHANI, 
+      GAIYOU, TOUROKUBI, KOUSINNBI
+      )
+    values (#{syainId,jdbcType=INTEGER}, #{kaisibi,jdbcType=DATE}, #{syuryobi,jdbcType=DATE}, 
+      #{pjName,jdbcType=VARCHAR}, #{tainitiFlag,jdbcType=INTEGER}, #{basyo,jdbcType=INTEGER}, 
+      #{kibo,jdbcType=INTEGER}, #{gyosyu,jdbcType=INTEGER}, #{kaihatukankyo,jdbcType=INTEGER}, 
+      #{unyoukankyo,jdbcType=INTEGER}, #{gengo,jdbcType=VARCHAR}, #{db,jdbcType=VARCHAR}, 
+      #{tool,jdbcType=VARCHAR}, #{tantou,jdbcType=INTEGER}, #{sagyohani,jdbcType=CHAR}, 
+      #{gaiyou,jdbcType=VARCHAR}, #{tourokubi,jdbcType=TIMESTAMP}, #{kousinnbi,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.model.SyainKeireki">
+    insert into syain_keireki
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="syainId != null">
+        SYAIN_ID,
+      </if>
+      <if test="kaisibi != null">
+        KAISIBI,
+      </if>
+      <if test="syuryobi != null">
+        SYURYOBI,
+      </if>
+      <if test="pjName != null">
+        PJ_NAME,
+      </if>
+      <if test="tainitiFlag != null">
+        TAINITI_FLAG,
+      </if>
+      <if test="basyo != null">
+        BASYO,
+      </if>
+      <if test="kibo != null">
+        KIBO,
+      </if>
+      <if test="gyosyu != null">
+        GYOSYU,
+      </if>
+      <if test="kaihatukankyo != null">
+        KAIHATUKANKYO,
+      </if>
+      <if test="unyoukankyo != null">
+        UNYOUKANKYO,
+      </if>
+      <if test="gengo != null">
+        GENGO,
+      </if>
+      <if test="db != null">
+        DB,
+      </if>
+      <if test="tool != null">
+        TOOL,
+      </if>
+      <if test="tantou != null">
+        TANTOU,
+      </if>
+      <if test="sagyohani != null">
+        SAGYOHANI,
+      </if>
+      <if test="gaiyou != null">
+        GAIYOU,
+      </if>
+      <if test="tourokubi != null">
+        TOUROKUBI,
+      </if>
+      <if test="kousinnbi != null">
+        KOUSINNBI,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="syainId != null">
+        #{syainId,jdbcType=INTEGER},
+      </if>
+      <if test="kaisibi != null">
+        #{kaisibi,jdbcType=DATE},
+      </if>
+      <if test="syuryobi != null">
+        #{syuryobi,jdbcType=DATE},
+      </if>
+      <if test="pjName != null">
+        #{pjName,jdbcType=VARCHAR},
+      </if>
+      <if test="tainitiFlag != null">
+        #{tainitiFlag,jdbcType=INTEGER},
+      </if>
+      <if test="basyo != null">
+        #{basyo,jdbcType=INTEGER},
+      </if>
+      <if test="kibo != null">
+        #{kibo,jdbcType=INTEGER},
+      </if>
+      <if test="gyosyu != null">
+        #{gyosyu,jdbcType=INTEGER},
+      </if>
+      <if test="kaihatukankyo != null">
+        #{kaihatukankyo,jdbcType=INTEGER},
+      </if>
+      <if test="unyoukankyo != null">
+        #{unyoukankyo,jdbcType=INTEGER},
+      </if>
+      <if test="gengo != null">
+        #{gengo,jdbcType=VARCHAR},
+      </if>
+      <if test="db != null">
+        #{db,jdbcType=VARCHAR},
+      </if>
+      <if test="tool != null">
+        #{tool,jdbcType=VARCHAR},
+      </if>
+      <if test="tantou != null">
+        #{tantou,jdbcType=INTEGER},
+      </if>
+      <if test="sagyohani != null">
+        #{sagyohani,jdbcType=CHAR},
+      </if>
+      <if test="gaiyou != null">
+        #{gaiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="tourokubi != null">
+        #{tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kousinnbi != null">
+        #{kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxm.model.SyainKeirekiExample" resultType="java.lang.Integer">
+    select count(*) from syain_keireki
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update syain_keireki
+    <set>
+      <if test="record.syainId != null">
+        SYAIN_ID = #{record.syainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaisibi != null">
+        KAISIBI = #{record.kaisibi,jdbcType=DATE},
+      </if>
+      <if test="record.syuryobi != null">
+        SYURYOBI = #{record.syuryobi,jdbcType=DATE},
+      </if>
+      <if test="record.pjName != null">
+        PJ_NAME = #{record.pjName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tainitiFlag != null">
+        TAINITI_FLAG = #{record.tainitiFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.basyo != null">
+        BASYO = #{record.basyo,jdbcType=INTEGER},
+      </if>
+      <if test="record.kibo != null">
+        KIBO = #{record.kibo,jdbcType=INTEGER},
+      </if>
+      <if test="record.gyosyu != null">
+        GYOSYU = #{record.gyosyu,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaihatukankyo != null">
+        KAIHATUKANKYO = #{record.kaihatukankyo,jdbcType=INTEGER},
+      </if>
+      <if test="record.unyoukankyo != null">
+        UNYOUKANKYO = #{record.unyoukankyo,jdbcType=INTEGER},
+      </if>
+      <if test="record.gengo != null">
+        GENGO = #{record.gengo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.db != null">
+        DB = #{record.db,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tool != null">
+        TOOL = #{record.tool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tantou != null">
+        TANTOU = #{record.tantou,jdbcType=INTEGER},
+      </if>
+      <if test="record.sagyohani != null">
+        SAGYOHANI = #{record.sagyohani,jdbcType=CHAR},
+      </if>
+      <if test="record.gaiyou != null">
+        GAIYOU = #{record.gaiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tourokubi != null">
+        TOUROKUBI = #{record.tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kousinnbi != null">
+        KOUSINNBI = #{record.kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update syain_keireki
+    set SYAIN_ID = #{record.syainId,jdbcType=INTEGER},
+      KAISIBI = #{record.kaisibi,jdbcType=DATE},
+      SYURYOBI = #{record.syuryobi,jdbcType=DATE},
+      PJ_NAME = #{record.pjName,jdbcType=VARCHAR},
+      TAINITI_FLAG = #{record.tainitiFlag,jdbcType=INTEGER},
+      BASYO = #{record.basyo,jdbcType=INTEGER},
+      KIBO = #{record.kibo,jdbcType=INTEGER},
+      GYOSYU = #{record.gyosyu,jdbcType=INTEGER},
+      KAIHATUKANKYO = #{record.kaihatukankyo,jdbcType=INTEGER},
+      UNYOUKANKYO = #{record.unyoukankyo,jdbcType=INTEGER},
+      GENGO = #{record.gengo,jdbcType=VARCHAR},
+      DB = #{record.db,jdbcType=VARCHAR},
+      TOOL = #{record.tool,jdbcType=VARCHAR},
+      TANTOU = #{record.tantou,jdbcType=INTEGER},
+      SAGYOHANI = #{record.sagyohani,jdbcType=CHAR},
+      GAIYOU = #{record.gaiyou,jdbcType=VARCHAR},
+      TOUROKUBI = #{record.tourokubi,jdbcType=TIMESTAMP},
+      KOUSINNBI = #{record.kousinnbi,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.model.SyainKeireki">
+    update syain_keireki
+    <set>
+      <if test="syuryobi != null">
+        SYURYOBI = #{syuryobi,jdbcType=DATE},
+      </if>
+      <if test="pjName != null">
+        PJ_NAME = #{pjName,jdbcType=VARCHAR},
+      </if>
+      <if test="tainitiFlag != null">
+        TAINITI_FLAG = #{tainitiFlag,jdbcType=INTEGER},
+      </if>
+      <if test="basyo != null">
+        BASYO = #{basyo,jdbcType=INTEGER},
+      </if>
+      <if test="kibo != null">
+        KIBO = #{kibo,jdbcType=INTEGER},
+      </if>
+      <if test="gyosyu != null">
+        GYOSYU = #{gyosyu,jdbcType=INTEGER},
+      </if>
+      <if test="kaihatukankyo != null">
+        KAIHATUKANKYO = #{kaihatukankyo,jdbcType=INTEGER},
+      </if>
+      <if test="unyoukankyo != null">
+        UNYOUKANKYO = #{unyoukankyo,jdbcType=INTEGER},
+      </if>
+      <if test="gengo != null">
+        GENGO = #{gengo,jdbcType=VARCHAR},
+      </if>
+      <if test="db != null">
+        DB = #{db,jdbcType=VARCHAR},
+      </if>
+      <if test="tool != null">
+        TOOL = #{tool,jdbcType=VARCHAR},
+      </if>
+      <if test="tantou != null">
+        TANTOU = #{tantou,jdbcType=INTEGER},
+      </if>
+      <if test="sagyohani != null">
+        SAGYOHANI = #{sagyohani,jdbcType=CHAR},
+      </if>
+      <if test="gaiyou != null">
+        GAIYOU = #{gaiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="tourokubi != null">
+        TOUROKUBI = #{tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kousinnbi != null">
+        KOUSINNBI = #{kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.model.SyainKeireki">
+    update syain_keireki
+    set SYURYOBI = #{syuryobi,jdbcType=DATE},
+      PJ_NAME = #{pjName,jdbcType=VARCHAR},
+      TAINITI_FLAG = #{tainitiFlag,jdbcType=INTEGER},
+      BASYO = #{basyo,jdbcType=INTEGER},
+      KIBO = #{kibo,jdbcType=INTEGER},
+      GYOSYU = #{gyosyu,jdbcType=INTEGER},
+      KAIHATUKANKYO = #{kaihatukankyo,jdbcType=INTEGER},
+      UNYOUKANKYO = #{unyoukankyo,jdbcType=INTEGER},
+      GENGO = #{gengo,jdbcType=VARCHAR},
+      DB = #{db,jdbcType=VARCHAR},
+      TOOL = #{tool,jdbcType=VARCHAR},
+      TANTOU = #{tantou,jdbcType=INTEGER},
+      SAGYOHANI = #{sagyohani,jdbcType=CHAR},
+      GAIYOU = #{gaiyou,jdbcType=VARCHAR},
+      TOUROKUBI = #{tourokubi,jdbcType=TIMESTAMP},
+      KOUSINNBI = #{kousinnbi,jdbcType=TIMESTAMP}
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </update>
+</mapper>

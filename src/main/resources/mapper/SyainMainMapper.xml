@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.SyainMainMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.model.SyainMain">
+    <id column="SYAIN_ID" jdbcType="INTEGER" property="syainId" />
+    <result column="FIRST_NAME_KANJI" jdbcType="VARCHAR" property="firstNameKanji" />
+    <result column="LAST_NAME_KANJI" jdbcType="VARCHAR" property="lastNameKanji" />
+    <result column="FIRST_NAME_KANA" jdbcType="VARCHAR" property="firstNameKana" />
+    <result column="LAST_NAME_KANA" jdbcType="VARCHAR" property="lastNameKana" />
+    <result column="FIRST_NAME_EIGO" jdbcType="VARCHAR" property="firstNameEigo" />
+    <result column="LAST_NAME_EIGO" jdbcType="VARCHAR" property="lastNameEigo" />
+    <result column="SEIBETU" jdbcType="INTEGER" property="seibetu" />
+    <result column="TANJYOBI" jdbcType="DATE" property="tanjyobi" />
+    <result column="KOKUSEKI" jdbcType="INTEGER" property="kokuseki" />
+    <result column="SYUSSINN" jdbcType="VARCHAR" property="syussinn" />
+    <result column="HAIGUSYA" jdbcType="INTEGER" property="haigusya" />
+    <result column="PASSPORT_NUM" jdbcType="VARCHAR" property="passportNum" />
+    <result column="PASSPORT_END_DATE" jdbcType="DATE" property="passportEndDate" />
+    <result column="VISA_KIKAN" jdbcType="INTEGER" property="visaKikan" />
+    <result column="VISA_END_DATE" jdbcType="DATE" property="visaEndDate" />
+    <result column="ZAIRYU_SIKAKU" jdbcType="INTEGER" property="zairyuSikaku" />
+    <result column="KOJIN_NUM" jdbcType="VARCHAR" property="kojinNum" />
+    <result column="ZAIRYU_NUM" jdbcType="VARCHAR" property="zairyuNum" />
+    <result column="SYOZOKU_KAISYA" jdbcType="INTEGER" property="syozokuKaisya" />
+    <result column="NYUUSYA_DATE" jdbcType="DATE" property="nyuusyaDate" />
+    <result column="TAISYA_DATE" jdbcType="DATE" property="taisyaDate" />
+    <result column="SYOKUGYO_KIND" jdbcType="INTEGER" property="syokugyoKind" />
+    <result column="RAINITI_DATE" jdbcType="DATE" property="rainitiDate" />
+    <result column="BIKOU" jdbcType="VARCHAR" property="bikou" />
+    <result column="YUUBIN" jdbcType="CHAR" property="yuubin" />
+    <result column="JYUSYO_1" jdbcType="VARCHAR" property="jyusyo1" />
+    <result column="JYUSYO_2" jdbcType="VARCHAR" property="jyusyo2" />
+    <result column="MOYORI_EKI" jdbcType="VARCHAR" property="moyoriEki" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="WECHAT" jdbcType="VARCHAR" property="wechat" />
+    <result column="LINE" jdbcType="VARCHAR" property="line" />
+    <result column="BOKOKU_JYUSYO" jdbcType="VARCHAR" property="bokokuJyusyo" />
+    <result column="BOKOKU_KINNKYUU_RENNRAKU" jdbcType="VARCHAR" property="bokokuKinnkyuuRennraku" />
+    <result column="SAISYUU_GAKUREKI" jdbcType="INTEGER" property="saisyuuGakureki" />
+    <result column="GAKKOU_NAME" jdbcType="VARCHAR" property="gakkouName" />
+    <result column="SENNMOM_NAME" jdbcType="VARCHAR" property="sennmomName" />
+    <result column="SOTUGYO_DATE" jdbcType="DATE" property="sotugyoDate" />
+    <result column="GYUMU_NENSU" jdbcType="REAL" property="gyumuNensu" />
+    <result column="IT_OS" jdbcType="VARCHAR" property="itOs" />
+    <result column="IT_GENGO" jdbcType="VARCHAR" property="itGengo" />
+    <result column="IT_DB" jdbcType="VARCHAR" property="itDb" />
+    <result column="IT_WEB_SERVER" jdbcType="VARCHAR" property="itWebServer" />
+    <result column="IT_FW" jdbcType="VARCHAR" property="itFw" />
+    <result column="IT_OTHER" jdbcType="VARCHAR" property="itOther" />
+    <result column="IT_BIKOU" jdbcType="VARCHAR" property="itBikou" />
+    <result column="DELETE_FLAG" jdbcType="INTEGER" property="deleteFlag" />
+    <result column="TOUROKUBI" jdbcType="TIMESTAMP" property="tourokubi" />
+    <result column="KOUSINNBI" jdbcType="TIMESTAMP" property="kousinnbi" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SYAIN_ID, FIRST_NAME_KANJI, LAST_NAME_KANJI, FIRST_NAME_KANA, LAST_NAME_KANA, FIRST_NAME_EIGO, 
+    LAST_NAME_EIGO, SEIBETU, TANJYOBI, KOKUSEKI, SYUSSINN, HAIGUSYA, PASSPORT_NUM, PASSPORT_END_DATE, 
+    VISA_KIKAN, VISA_END_DATE, ZAIRYU_SIKAKU, KOJIN_NUM, ZAIRYU_NUM, SYOZOKU_KAISYA, 
+    NYUUSYA_DATE, TAISYA_DATE, SYOKUGYO_KIND, RAINITI_DATE, BIKOU, YUUBIN, JYUSYO_1, 
+    JYUSYO_2, MOYORI_EKI, TEL, EMAIL, WECHAT, LINE, BOKOKU_JYUSYO, BOKOKU_KINNKYUU_RENNRAKU, 
+    SAISYUU_GAKUREKI, GAKKOU_NAME, SENNMOM_NAME, SOTUGYO_DATE, GYUMU_NENSU, IT_OS, IT_GENGO, 
+    IT_DB, IT_WEB_SERVER, IT_FW, IT_OTHER, IT_BIKOU, DELETE_FLAG, TOUROKUBI, KOUSINNBI
+  </sql>
+  <select id="selectByExample" parameterType="com.lxm.model.SyainMainExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from syain_main
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syain_main
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from syain_main
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxm.model.SyainMainExample">
+    delete from syain_main
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxm.model.SyainMain">
+    insert into syain_main (SYAIN_ID, FIRST_NAME_KANJI, LAST_NAME_KANJI, 
+      FIRST_NAME_KANA, LAST_NAME_KANA, FIRST_NAME_EIGO, 
+      LAST_NAME_EIGO, SEIBETU, TANJYOBI, 
+      KOKUSEKI, SYUSSINN, HAIGUSYA, 
+      PASSPORT_NUM, PASSPORT_END_DATE, VISA_KIKAN, 
+      VISA_END_DATE, ZAIRYU_SIKAKU, KOJIN_NUM, 
+      ZAIRYU_NUM, SYOZOKU_KAISYA, NYUUSYA_DATE, 
+      TAISYA_DATE, SYOKUGYO_KIND, RAINITI_DATE, 
+      BIKOU, YUUBIN, JYUSYO_1, 
+      JYUSYO_2, MOYORI_EKI, TEL, 
+      EMAIL, WECHAT, LINE, 
+      BOKOKU_JYUSYO, BOKOKU_KINNKYUU_RENNRAKU, SAISYUU_GAKUREKI, 
+      GAKKOU_NAME, SENNMOM_NAME, SOTUGYO_DATE, 
+      GYUMU_NENSU, IT_OS, IT_GENGO, 
+      IT_DB, IT_WEB_SERVER, IT_FW, 
+      IT_OTHER, IT_BIKOU, DELETE_FLAG, 
+      TOUROKUBI, KOUSINNBI)
+    values (#{syainId,jdbcType=INTEGER}, #{firstNameKanji,jdbcType=VARCHAR}, #{lastNameKanji,jdbcType=VARCHAR}, 
+      #{firstNameKana,jdbcType=VARCHAR}, #{lastNameKana,jdbcType=VARCHAR}, #{firstNameEigo,jdbcType=VARCHAR}, 
+      #{lastNameEigo,jdbcType=VARCHAR}, #{seibetu,jdbcType=INTEGER}, #{tanjyobi,jdbcType=DATE}, 
+      #{kokuseki,jdbcType=INTEGER}, #{syussinn,jdbcType=VARCHAR}, #{haigusya,jdbcType=INTEGER}, 
+      #{passportNum,jdbcType=VARCHAR}, #{passportEndDate,jdbcType=DATE}, #{visaKikan,jdbcType=INTEGER}, 
+      #{visaEndDate,jdbcType=DATE}, #{zairyuSikaku,jdbcType=INTEGER}, #{kojinNum,jdbcType=VARCHAR}, 
+      #{zairyuNum,jdbcType=VARCHAR}, #{syozokuKaisya,jdbcType=INTEGER}, #{nyuusyaDate,jdbcType=DATE}, 
+      #{taisyaDate,jdbcType=DATE}, #{syokugyoKind,jdbcType=INTEGER}, #{rainitiDate,jdbcType=DATE}, 
+      #{bikou,jdbcType=VARCHAR}, #{yuubin,jdbcType=CHAR}, #{jyusyo1,jdbcType=VARCHAR}, 
+      #{jyusyo2,jdbcType=VARCHAR}, #{moyoriEki,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{line,jdbcType=VARCHAR}, 
+      #{bokokuJyusyo,jdbcType=VARCHAR}, #{bokokuKinnkyuuRennraku,jdbcType=VARCHAR}, #{saisyuuGakureki,jdbcType=INTEGER}, 
+      #{gakkouName,jdbcType=VARCHAR}, #{sennmomName,jdbcType=VARCHAR}, #{sotugyoDate,jdbcType=DATE}, 
+      #{gyumuNensu,jdbcType=REAL}, #{itOs,jdbcType=VARCHAR}, #{itGengo,jdbcType=VARCHAR}, 
+      #{itDb,jdbcType=VARCHAR}, #{itWebServer,jdbcType=VARCHAR}, #{itFw,jdbcType=VARCHAR}, 
+      #{itOther,jdbcType=VARCHAR}, #{itBikou,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{tourokubi,jdbcType=TIMESTAMP}, #{kousinnbi,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.model.SyainMain">
+    insert into syain_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="syainId != null">
+        SYAIN_ID,
+      </if>
+      <if test="firstNameKanji != null">
+        FIRST_NAME_KANJI,
+      </if>
+      <if test="lastNameKanji != null">
+        LAST_NAME_KANJI,
+      </if>
+      <if test="firstNameKana != null">
+        FIRST_NAME_KANA,
+      </if>
+      <if test="lastNameKana != null">
+        LAST_NAME_KANA,
+      </if>
+      <if test="firstNameEigo != null">
+        FIRST_NAME_EIGO,
+      </if>
+      <if test="lastNameEigo != null">
+        LAST_NAME_EIGO,
+      </if>
+      <if test="seibetu != null">
+        SEIBETU,
+      </if>
+      <if test="tanjyobi != null">
+        TANJYOBI,
+      </if>
+      <if test="kokuseki != null">
+        KOKUSEKI,
+      </if>
+      <if test="syussinn != null">
+        SYUSSINN,
+      </if>
+      <if test="haigusya != null">
+        HAIGUSYA,
+      </if>
+      <if test="passportNum != null">
+        PASSPORT_NUM,
+      </if>
+      <if test="passportEndDate != null">
+        PASSPORT_END_DATE,
+      </if>
+      <if test="visaKikan != null">
+        VISA_KIKAN,
+      </if>
+      <if test="visaEndDate != null">
+        VISA_END_DATE,
+      </if>
+      <if test="zairyuSikaku != null">
+        ZAIRYU_SIKAKU,
+      </if>
+      <if test="kojinNum != null">
+        KOJIN_NUM,
+      </if>
+      <if test="zairyuNum != null">
+        ZAIRYU_NUM,
+      </if>
+      <if test="syozokuKaisya != null">
+        SYOZOKU_KAISYA,
+      </if>
+      <if test="nyuusyaDate != null">
+        NYUUSYA_DATE,
+      </if>
+      <if test="taisyaDate != null">
+        TAISYA_DATE,
+      </if>
+      <if test="syokugyoKind != null">
+        SYOKUGYO_KIND,
+      </if>
+      <if test="rainitiDate != null">
+        RAINITI_DATE,
+      </if>
+      <if test="bikou != null">
+        BIKOU,
+      </if>
+      <if test="yuubin != null">
+        YUUBIN,
+      </if>
+      <if test="jyusyo1 != null">
+        JYUSYO_1,
+      </if>
+      <if test="jyusyo2 != null">
+        JYUSYO_2,
+      </if>
+      <if test="moyoriEki != null">
+        MOYORI_EKI,
+      </if>
+      <if test="tel != null">
+        TEL,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="wechat != null">
+        WECHAT,
+      </if>
+      <if test="line != null">
+        LINE,
+      </if>
+      <if test="bokokuJyusyo != null">
+        BOKOKU_JYUSYO,
+      </if>
+      <if test="bokokuKinnkyuuRennraku != null">
+        BOKOKU_KINNKYUU_RENNRAKU,
+      </if>
+      <if test="saisyuuGakureki != null">
+        SAISYUU_GAKUREKI,
+      </if>
+      <if test="gakkouName != null">
+        GAKKOU_NAME,
+      </if>
+      <if test="sennmomName != null">
+        SENNMOM_NAME,
+      </if>
+      <if test="sotugyoDate != null">
+        SOTUGYO_DATE,
+      </if>
+      <if test="gyumuNensu != null">
+        GYUMU_NENSU,
+      </if>
+      <if test="itOs != null">
+        IT_OS,
+      </if>
+      <if test="itGengo != null">
+        IT_GENGO,
+      </if>
+      <if test="itDb != null">
+        IT_DB,
+      </if>
+      <if test="itWebServer != null">
+        IT_WEB_SERVER,
+      </if>
+      <if test="itFw != null">
+        IT_FW,
+      </if>
+      <if test="itOther != null">
+        IT_OTHER,
+      </if>
+      <if test="itBikou != null">
+        IT_BIKOU,
+      </if>
+      <if test="deleteFlag != null">
+        DELETE_FLAG,
+      </if>
+      <if test="tourokubi != null">
+        TOUROKUBI,
+      </if>
+      <if test="kousinnbi != null">
+        KOUSINNBI,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="syainId != null">
+        #{syainId,jdbcType=INTEGER},
+      </if>
+      <if test="firstNameKanji != null">
+        #{firstNameKanji,jdbcType=VARCHAR},
+      </if>
+      <if test="lastNameKanji != null">
+        #{lastNameKanji,jdbcType=VARCHAR},
+      </if>
+      <if test="firstNameKana != null">
+        #{firstNameKana,jdbcType=VARCHAR},
+      </if>
+      <if test="lastNameKana != null">
+        #{lastNameKana,jdbcType=VARCHAR},
+      </if>
+      <if test="firstNameEigo != null">
+        #{firstNameEigo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastNameEigo != null">
+        #{lastNameEigo,jdbcType=VARCHAR},
+      </if>
+      <if test="seibetu != null">
+        #{seibetu,jdbcType=INTEGER},
+      </if>
+      <if test="tanjyobi != null">
+        #{tanjyobi,jdbcType=DATE},
+      </if>
+      <if test="kokuseki != null">
+        #{kokuseki,jdbcType=INTEGER},
+      </if>
+      <if test="syussinn != null">
+        #{syussinn,jdbcType=VARCHAR},
+      </if>
+      <if test="haigusya != null">
+        #{haigusya,jdbcType=INTEGER},
+      </if>
+      <if test="passportNum != null">
+        #{passportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="passportEndDate != null">
+        #{passportEndDate,jdbcType=DATE},
+      </if>
+      <if test="visaKikan != null">
+        #{visaKikan,jdbcType=INTEGER},
+      </if>
+      <if test="visaEndDate != null">
+        #{visaEndDate,jdbcType=DATE},
+      </if>
+      <if test="zairyuSikaku != null">
+        #{zairyuSikaku,jdbcType=INTEGER},
+      </if>
+      <if test="kojinNum != null">
+        #{kojinNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zairyuNum != null">
+        #{zairyuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="syozokuKaisya != null">
+        #{syozokuKaisya,jdbcType=INTEGER},
+      </if>
+      <if test="nyuusyaDate != null">
+        #{nyuusyaDate,jdbcType=DATE},
+      </if>
+      <if test="taisyaDate != null">
+        #{taisyaDate,jdbcType=DATE},
+      </if>
+      <if test="syokugyoKind != null">
+        #{syokugyoKind,jdbcType=INTEGER},
+      </if>
+      <if test="rainitiDate != null">
+        #{rainitiDate,jdbcType=DATE},
+      </if>
+      <if test="bikou != null">
+        #{bikou,jdbcType=VARCHAR},
+      </if>
+      <if test="yuubin != null">
+        #{yuubin,jdbcType=CHAR},
+      </if>
+      <if test="jyusyo1 != null">
+        #{jyusyo1,jdbcType=VARCHAR},
+      </if>
+      <if test="jyusyo2 != null">
+        #{jyusyo2,jdbcType=VARCHAR},
+      </if>
+      <if test="moyoriEki != null">
+        #{moyoriEki,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="line != null">
+        #{line,jdbcType=VARCHAR},
+      </if>
+      <if test="bokokuJyusyo != null">
+        #{bokokuJyusyo,jdbcType=VARCHAR},
+      </if>
+      <if test="bokokuKinnkyuuRennraku != null">
+        #{bokokuKinnkyuuRennraku,jdbcType=VARCHAR},
+      </if>
+      <if test="saisyuuGakureki != null">
+        #{saisyuuGakureki,jdbcType=INTEGER},
+      </if>
+      <if test="gakkouName != null">
+        #{gakkouName,jdbcType=VARCHAR},
+      </if>
+      <if test="sennmomName != null">
+        #{sennmomName,jdbcType=VARCHAR},
+      </if>
+      <if test="sotugyoDate != null">
+        #{sotugyoDate,jdbcType=DATE},
+      </if>
+      <if test="gyumuNensu != null">
+        #{gyumuNensu,jdbcType=REAL},
+      </if>
+      <if test="itOs != null">
+        #{itOs,jdbcType=VARCHAR},
+      </if>
+      <if test="itGengo != null">
+        #{itGengo,jdbcType=VARCHAR},
+      </if>
+      <if test="itDb != null">
+        #{itDb,jdbcType=VARCHAR},
+      </if>
+      <if test="itWebServer != null">
+        #{itWebServer,jdbcType=VARCHAR},
+      </if>
+      <if test="itFw != null">
+        #{itFw,jdbcType=VARCHAR},
+      </if>
+      <if test="itOther != null">
+        #{itOther,jdbcType=VARCHAR},
+      </if>
+      <if test="itBikou != null">
+        #{itBikou,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="tourokubi != null">
+        #{tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kousinnbi != null">
+        #{kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxm.model.SyainMainExample" resultType="java.lang.Integer">
+    select count(*) from syain_main
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update syain_main
+    <set>
+      <if test="record.syainId != null">
+        SYAIN_ID = #{record.syainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstNameKanji != null">
+        FIRST_NAME_KANJI = #{record.firstNameKanji,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastNameKanji != null">
+        LAST_NAME_KANJI = #{record.lastNameKanji,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstNameKana != null">
+        FIRST_NAME_KANA = #{record.firstNameKana,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastNameKana != null">
+        LAST_NAME_KANA = #{record.lastNameKana,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstNameEigo != null">
+        FIRST_NAME_EIGO = #{record.firstNameEigo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastNameEigo != null">
+        LAST_NAME_EIGO = #{record.lastNameEigo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seibetu != null">
+        SEIBETU = #{record.seibetu,jdbcType=INTEGER},
+      </if>
+      <if test="record.tanjyobi != null">
+        TANJYOBI = #{record.tanjyobi,jdbcType=DATE},
+      </if>
+      <if test="record.kokuseki != null">
+        KOKUSEKI = #{record.kokuseki,jdbcType=INTEGER},
+      </if>
+      <if test="record.syussinn != null">
+        SYUSSINN = #{record.syussinn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haigusya != null">
+        HAIGUSYA = #{record.haigusya,jdbcType=INTEGER},
+      </if>
+      <if test="record.passportNum != null">
+        PASSPORT_NUM = #{record.passportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passportEndDate != null">
+        PASSPORT_END_DATE = #{record.passportEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.visaKikan != null">
+        VISA_KIKAN = #{record.visaKikan,jdbcType=INTEGER},
+      </if>
+      <if test="record.visaEndDate != null">
+        VISA_END_DATE = #{record.visaEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.zairyuSikaku != null">
+        ZAIRYU_SIKAKU = #{record.zairyuSikaku,jdbcType=INTEGER},
+      </if>
+      <if test="record.kojinNum != null">
+        KOJIN_NUM = #{record.kojinNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zairyuNum != null">
+        ZAIRYU_NUM = #{record.zairyuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syozokuKaisya != null">
+        SYOZOKU_KAISYA = #{record.syozokuKaisya,jdbcType=INTEGER},
+      </if>
+      <if test="record.nyuusyaDate != null">
+        NYUUSYA_DATE = #{record.nyuusyaDate,jdbcType=DATE},
+      </if>
+      <if test="record.taisyaDate != null">
+        TAISYA_DATE = #{record.taisyaDate,jdbcType=DATE},
+      </if>
+      <if test="record.syokugyoKind != null">
+        SYOKUGYO_KIND = #{record.syokugyoKind,jdbcType=INTEGER},
+      </if>
+      <if test="record.rainitiDate != null">
+        RAINITI_DATE = #{record.rainitiDate,jdbcType=DATE},
+      </if>
+      <if test="record.bikou != null">
+        BIKOU = #{record.bikou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yuubin != null">
+        YUUBIN = #{record.yuubin,jdbcType=CHAR},
+      </if>
+      <if test="record.jyusyo1 != null">
+        JYUSYO_1 = #{record.jyusyo1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyusyo2 != null">
+        JYUSYO_2 = #{record.jyusyo2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moyoriEki != null">
+        MOYORI_EKI = #{record.moyoriEki,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechat != null">
+        WECHAT = #{record.wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.line != null">
+        LINE = #{record.line,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bokokuJyusyo != null">
+        BOKOKU_JYUSYO = #{record.bokokuJyusyo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bokokuKinnkyuuRennraku != null">
+        BOKOKU_KINNKYUU_RENNRAKU = #{record.bokokuKinnkyuuRennraku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saisyuuGakureki != null">
+        SAISYUU_GAKUREKI = #{record.saisyuuGakureki,jdbcType=INTEGER},
+      </if>
+      <if test="record.gakkouName != null">
+        GAKKOU_NAME = #{record.gakkouName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sennmomName != null">
+        SENNMOM_NAME = #{record.sennmomName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sotugyoDate != null">
+        SOTUGYO_DATE = #{record.sotugyoDate,jdbcType=DATE},
+      </if>
+      <if test="record.gyumuNensu != null">
+        GYUMU_NENSU = #{record.gyumuNensu,jdbcType=REAL},
+      </if>
+      <if test="record.itOs != null">
+        IT_OS = #{record.itOs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itGengo != null">
+        IT_GENGO = #{record.itGengo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itDb != null">
+        IT_DB = #{record.itDb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itWebServer != null">
+        IT_WEB_SERVER = #{record.itWebServer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itFw != null">
+        IT_FW = #{record.itFw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itOther != null">
+        IT_OTHER = #{record.itOther,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itBikou != null">
+        IT_BIKOU = #{record.itBikou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteFlag != null">
+        DELETE_FLAG = #{record.deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.tourokubi != null">
+        TOUROKUBI = #{record.tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kousinnbi != null">
+        KOUSINNBI = #{record.kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update syain_main
+    set SYAIN_ID = #{record.syainId,jdbcType=INTEGER},
+      FIRST_NAME_KANJI = #{record.firstNameKanji,jdbcType=VARCHAR},
+      LAST_NAME_KANJI = #{record.lastNameKanji,jdbcType=VARCHAR},
+      FIRST_NAME_KANA = #{record.firstNameKana,jdbcType=VARCHAR},
+      LAST_NAME_KANA = #{record.lastNameKana,jdbcType=VARCHAR},
+      FIRST_NAME_EIGO = #{record.firstNameEigo,jdbcType=VARCHAR},
+      LAST_NAME_EIGO = #{record.lastNameEigo,jdbcType=VARCHAR},
+      SEIBETU = #{record.seibetu,jdbcType=INTEGER},
+      TANJYOBI = #{record.tanjyobi,jdbcType=DATE},
+      KOKUSEKI = #{record.kokuseki,jdbcType=INTEGER},
+      SYUSSINN = #{record.syussinn,jdbcType=VARCHAR},
+      HAIGUSYA = #{record.haigusya,jdbcType=INTEGER},
+      PASSPORT_NUM = #{record.passportNum,jdbcType=VARCHAR},
+      PASSPORT_END_DATE = #{record.passportEndDate,jdbcType=DATE},
+      VISA_KIKAN = #{record.visaKikan,jdbcType=INTEGER},
+      VISA_END_DATE = #{record.visaEndDate,jdbcType=DATE},
+      ZAIRYU_SIKAKU = #{record.zairyuSikaku,jdbcType=INTEGER},
+      KOJIN_NUM = #{record.kojinNum,jdbcType=VARCHAR},
+      ZAIRYU_NUM = #{record.zairyuNum,jdbcType=VARCHAR},
+      SYOZOKU_KAISYA = #{record.syozokuKaisya,jdbcType=INTEGER},
+      NYUUSYA_DATE = #{record.nyuusyaDate,jdbcType=DATE},
+      TAISYA_DATE = #{record.taisyaDate,jdbcType=DATE},
+      SYOKUGYO_KIND = #{record.syokugyoKind,jdbcType=INTEGER},
+      RAINITI_DATE = #{record.rainitiDate,jdbcType=DATE},
+      BIKOU = #{record.bikou,jdbcType=VARCHAR},
+      YUUBIN = #{record.yuubin,jdbcType=CHAR},
+      JYUSYO_1 = #{record.jyusyo1,jdbcType=VARCHAR},
+      JYUSYO_2 = #{record.jyusyo2,jdbcType=VARCHAR},
+      MOYORI_EKI = #{record.moyoriEki,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      WECHAT = #{record.wechat,jdbcType=VARCHAR},
+      LINE = #{record.line,jdbcType=VARCHAR},
+      BOKOKU_JYUSYO = #{record.bokokuJyusyo,jdbcType=VARCHAR},
+      BOKOKU_KINNKYUU_RENNRAKU = #{record.bokokuKinnkyuuRennraku,jdbcType=VARCHAR},
+      SAISYUU_GAKUREKI = #{record.saisyuuGakureki,jdbcType=INTEGER},
+      GAKKOU_NAME = #{record.gakkouName,jdbcType=VARCHAR},
+      SENNMOM_NAME = #{record.sennmomName,jdbcType=VARCHAR},
+      SOTUGYO_DATE = #{record.sotugyoDate,jdbcType=DATE},
+      GYUMU_NENSU = #{record.gyumuNensu,jdbcType=REAL},
+      IT_OS = #{record.itOs,jdbcType=VARCHAR},
+      IT_GENGO = #{record.itGengo,jdbcType=VARCHAR},
+      IT_DB = #{record.itDb,jdbcType=VARCHAR},
+      IT_WEB_SERVER = #{record.itWebServer,jdbcType=VARCHAR},
+      IT_FW = #{record.itFw,jdbcType=VARCHAR},
+      IT_OTHER = #{record.itOther,jdbcType=VARCHAR},
+      IT_BIKOU = #{record.itBikou,jdbcType=VARCHAR},
+      DELETE_FLAG = #{record.deleteFlag,jdbcType=INTEGER},
+      TOUROKUBI = #{record.tourokubi,jdbcType=TIMESTAMP},
+      KOUSINNBI = #{record.kousinnbi,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.model.SyainMain">
+    update syain_main
+    <set>
+      <if test="firstNameKanji != null">
+        FIRST_NAME_KANJI = #{firstNameKanji,jdbcType=VARCHAR},
+      </if>
+      <if test="lastNameKanji != null">
+        LAST_NAME_KANJI = #{lastNameKanji,jdbcType=VARCHAR},
+      </if>
+      <if test="firstNameKana != null">
+        FIRST_NAME_KANA = #{firstNameKana,jdbcType=VARCHAR},
+      </if>
+      <if test="lastNameKana != null">
+        LAST_NAME_KANA = #{lastNameKana,jdbcType=VARCHAR},
+      </if>
+      <if test="firstNameEigo != null">
+        FIRST_NAME_EIGO = #{firstNameEigo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastNameEigo != null">
+        LAST_NAME_EIGO = #{lastNameEigo,jdbcType=VARCHAR},
+      </if>
+      <if test="seibetu != null">
+        SEIBETU = #{seibetu,jdbcType=INTEGER},
+      </if>
+      <if test="tanjyobi != null">
+        TANJYOBI = #{tanjyobi,jdbcType=DATE},
+      </if>
+      <if test="kokuseki != null">
+        KOKUSEKI = #{kokuseki,jdbcType=INTEGER},
+      </if>
+      <if test="syussinn != null">
+        SYUSSINN = #{syussinn,jdbcType=VARCHAR},
+      </if>
+      <if test="haigusya != null">
+        HAIGUSYA = #{haigusya,jdbcType=INTEGER},
+      </if>
+      <if test="passportNum != null">
+        PASSPORT_NUM = #{passportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="passportEndDate != null">
+        PASSPORT_END_DATE = #{passportEndDate,jdbcType=DATE},
+      </if>
+      <if test="visaKikan != null">
+        VISA_KIKAN = #{visaKikan,jdbcType=INTEGER},
+      </if>
+      <if test="visaEndDate != null">
+        VISA_END_DATE = #{visaEndDate,jdbcType=DATE},
+      </if>
+      <if test="zairyuSikaku != null">
+        ZAIRYU_SIKAKU = #{zairyuSikaku,jdbcType=INTEGER},
+      </if>
+      <if test="kojinNum != null">
+        KOJIN_NUM = #{kojinNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zairyuNum != null">
+        ZAIRYU_NUM = #{zairyuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="syozokuKaisya != null">
+        SYOZOKU_KAISYA = #{syozokuKaisya,jdbcType=INTEGER},
+      </if>
+      <if test="nyuusyaDate != null">
+        NYUUSYA_DATE = #{nyuusyaDate,jdbcType=DATE},
+      </if>
+      <if test="taisyaDate != null">
+        TAISYA_DATE = #{taisyaDate,jdbcType=DATE},
+      </if>
+      <if test="syokugyoKind != null">
+        SYOKUGYO_KIND = #{syokugyoKind,jdbcType=INTEGER},
+      </if>
+      <if test="rainitiDate != null">
+        RAINITI_DATE = #{rainitiDate,jdbcType=DATE},
+      </if>
+      <if test="bikou != null">
+        BIKOU = #{bikou,jdbcType=VARCHAR},
+      </if>
+      <if test="yuubin != null">
+        YUUBIN = #{yuubin,jdbcType=CHAR},
+      </if>
+      <if test="jyusyo1 != null">
+        JYUSYO_1 = #{jyusyo1,jdbcType=VARCHAR},
+      </if>
+      <if test="jyusyo2 != null">
+        JYUSYO_2 = #{jyusyo2,jdbcType=VARCHAR},
+      </if>
+      <if test="moyoriEki != null">
+        MOYORI_EKI = #{moyoriEki,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="line != null">
+        LINE = #{line,jdbcType=VARCHAR},
+      </if>
+      <if test="bokokuJyusyo != null">
+        BOKOKU_JYUSYO = #{bokokuJyusyo,jdbcType=VARCHAR},
+      </if>
+      <if test="bokokuKinnkyuuRennraku != null">
+        BOKOKU_KINNKYUU_RENNRAKU = #{bokokuKinnkyuuRennraku,jdbcType=VARCHAR},
+      </if>
+      <if test="saisyuuGakureki != null">
+        SAISYUU_GAKUREKI = #{saisyuuGakureki,jdbcType=INTEGER},
+      </if>
+      <if test="gakkouName != null">
+        GAKKOU_NAME = #{gakkouName,jdbcType=VARCHAR},
+      </if>
+      <if test="sennmomName != null">
+        SENNMOM_NAME = #{sennmomName,jdbcType=VARCHAR},
+      </if>
+      <if test="sotugyoDate != null">
+        SOTUGYO_DATE = #{sotugyoDate,jdbcType=DATE},
+      </if>
+      <if test="gyumuNensu != null">
+        GYUMU_NENSU = #{gyumuNensu,jdbcType=REAL},
+      </if>
+      <if test="itOs != null">
+        IT_OS = #{itOs,jdbcType=VARCHAR},
+      </if>
+      <if test="itGengo != null">
+        IT_GENGO = #{itGengo,jdbcType=VARCHAR},
+      </if>
+      <if test="itDb != null">
+        IT_DB = #{itDb,jdbcType=VARCHAR},
+      </if>
+      <if test="itWebServer != null">
+        IT_WEB_SERVER = #{itWebServer,jdbcType=VARCHAR},
+      </if>
+      <if test="itFw != null">
+        IT_FW = #{itFw,jdbcType=VARCHAR},
+      </if>
+      <if test="itOther != null">
+        IT_OTHER = #{itOther,jdbcType=VARCHAR},
+      </if>
+      <if test="itBikou != null">
+        IT_BIKOU = #{itBikou,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        DELETE_FLAG = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="tourokubi != null">
+        TOUROKUBI = #{tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kousinnbi != null">
+        KOUSINNBI = #{kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.model.SyainMain">
+    update syain_main
+    set FIRST_NAME_KANJI = #{firstNameKanji,jdbcType=VARCHAR},
+      LAST_NAME_KANJI = #{lastNameKanji,jdbcType=VARCHAR},
+      FIRST_NAME_KANA = #{firstNameKana,jdbcType=VARCHAR},
+      LAST_NAME_KANA = #{lastNameKana,jdbcType=VARCHAR},
+      FIRST_NAME_EIGO = #{firstNameEigo,jdbcType=VARCHAR},
+      LAST_NAME_EIGO = #{lastNameEigo,jdbcType=VARCHAR},
+      SEIBETU = #{seibetu,jdbcType=INTEGER},
+      TANJYOBI = #{tanjyobi,jdbcType=DATE},
+      KOKUSEKI = #{kokuseki,jdbcType=INTEGER},
+      SYUSSINN = #{syussinn,jdbcType=VARCHAR},
+      HAIGUSYA = #{haigusya,jdbcType=INTEGER},
+      PASSPORT_NUM = #{passportNum,jdbcType=VARCHAR},
+      PASSPORT_END_DATE = #{passportEndDate,jdbcType=DATE},
+      VISA_KIKAN = #{visaKikan,jdbcType=INTEGER},
+      VISA_END_DATE = #{visaEndDate,jdbcType=DATE},
+      ZAIRYU_SIKAKU = #{zairyuSikaku,jdbcType=INTEGER},
+      KOJIN_NUM = #{kojinNum,jdbcType=VARCHAR},
+      ZAIRYU_NUM = #{zairyuNum,jdbcType=VARCHAR},
+      SYOZOKU_KAISYA = #{syozokuKaisya,jdbcType=INTEGER},
+      NYUUSYA_DATE = #{nyuusyaDate,jdbcType=DATE},
+      TAISYA_DATE = #{taisyaDate,jdbcType=DATE},
+      SYOKUGYO_KIND = #{syokugyoKind,jdbcType=INTEGER},
+      RAINITI_DATE = #{rainitiDate,jdbcType=DATE},
+      BIKOU = #{bikou,jdbcType=VARCHAR},
+      YUUBIN = #{yuubin,jdbcType=CHAR},
+      JYUSYO_1 = #{jyusyo1,jdbcType=VARCHAR},
+      JYUSYO_2 = #{jyusyo2,jdbcType=VARCHAR},
+      MOYORI_EKI = #{moyoriEki,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      LINE = #{line,jdbcType=VARCHAR},
+      BOKOKU_JYUSYO = #{bokokuJyusyo,jdbcType=VARCHAR},
+      BOKOKU_KINNKYUU_RENNRAKU = #{bokokuKinnkyuuRennraku,jdbcType=VARCHAR},
+      SAISYUU_GAKUREKI = #{saisyuuGakureki,jdbcType=INTEGER},
+      GAKKOU_NAME = #{gakkouName,jdbcType=VARCHAR},
+      SENNMOM_NAME = #{sennmomName,jdbcType=VARCHAR},
+      SOTUGYO_DATE = #{sotugyoDate,jdbcType=DATE},
+      GYUMU_NENSU = #{gyumuNensu,jdbcType=REAL},
+      IT_OS = #{itOs,jdbcType=VARCHAR},
+      IT_GENGO = #{itGengo,jdbcType=VARCHAR},
+      IT_DB = #{itDb,jdbcType=VARCHAR},
+      IT_WEB_SERVER = #{itWebServer,jdbcType=VARCHAR},
+      IT_FW = #{itFw,jdbcType=VARCHAR},
+      IT_OTHER = #{itOther,jdbcType=VARCHAR},
+      IT_BIKOU = #{itBikou,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=INTEGER},
+      TOUROKUBI = #{tourokubi,jdbcType=TIMESTAMP},
+      KOUSINNBI = #{kousinnbi,jdbcType=TIMESTAMP}
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+  </update>
+</mapper>

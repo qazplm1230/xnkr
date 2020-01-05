@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.SyainRirekiMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.model.SyainRireki">
+    <id column="SYAIN_ID" jdbcType="INTEGER" property="syainId" />
+    <id column="KAISIBI" jdbcType="DATE" property="kaisibi" />
+    <result column="SYURYOBI" jdbcType="DATE" property="syuryobi" />
+    <result column="KAISYA_NAME" jdbcType="VARCHAR" property="kaisyaName" />
+    <result column="BUSYO" jdbcType="VARCHAR" property="busyo" />
+    <result column="TOUROKUBI" jdbcType="TIMESTAMP" property="tourokubi" />
+    <result column="KOUSINNBI" jdbcType="TIMESTAMP" property="kousinnbi" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SYAIN_ID, KAISIBI, SYURYOBI, KAISYA_NAME, BUSYO, TOUROKUBI, KOUSINNBI
+  </sql>
+  <select id="selectByExample" parameterType="com.lxm.model.SyainRirekiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from syain_rireki
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.lxm.model.SyainRirekiKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syain_rireki
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lxm.model.SyainRirekiKey">
+    delete from syain_rireki
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxm.model.SyainRirekiExample">
+    delete from syain_rireki
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxm.model.SyainRireki">
+    insert into syain_rireki (SYAIN_ID, KAISIBI, SYURYOBI, 
+      KAISYA_NAME, BUSYO, TOUROKUBI, 
+      KOUSINNBI)
+    values (#{syainId,jdbcType=INTEGER}, #{kaisibi,jdbcType=DATE}, #{syuryobi,jdbcType=DATE}, 
+      #{kaisyaName,jdbcType=VARCHAR}, #{busyo,jdbcType=VARCHAR}, #{tourokubi,jdbcType=TIMESTAMP}, 
+      #{kousinnbi,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.model.SyainRireki">
+    insert into syain_rireki
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="syainId != null">
+        SYAIN_ID,
+      </if>
+      <if test="kaisibi != null">
+        KAISIBI,
+      </if>
+      <if test="syuryobi != null">
+        SYURYOBI,
+      </if>
+      <if test="kaisyaName != null">
+        KAISYA_NAME,
+      </if>
+      <if test="busyo != null">
+        BUSYO,
+      </if>
+      <if test="tourokubi != null">
+        TOUROKUBI,
+      </if>
+      <if test="kousinnbi != null">
+        KOUSINNBI,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="syainId != null">
+        #{syainId,jdbcType=INTEGER},
+      </if>
+      <if test="kaisibi != null">
+        #{kaisibi,jdbcType=DATE},
+      </if>
+      <if test="syuryobi != null">
+        #{syuryobi,jdbcType=DATE},
+      </if>
+      <if test="kaisyaName != null">
+        #{kaisyaName,jdbcType=VARCHAR},
+      </if>
+      <if test="busyo != null">
+        #{busyo,jdbcType=VARCHAR},
+      </if>
+      <if test="tourokubi != null">
+        #{tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kousinnbi != null">
+        #{kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxm.model.SyainRirekiExample" resultType="java.lang.Integer">
+    select count(*) from syain_rireki
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update syain_rireki
+    <set>
+      <if test="record.syainId != null">
+        SYAIN_ID = #{record.syainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaisibi != null">
+        KAISIBI = #{record.kaisibi,jdbcType=DATE},
+      </if>
+      <if test="record.syuryobi != null">
+        SYURYOBI = #{record.syuryobi,jdbcType=DATE},
+      </if>
+      <if test="record.kaisyaName != null">
+        KAISYA_NAME = #{record.kaisyaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busyo != null">
+        BUSYO = #{record.busyo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tourokubi != null">
+        TOUROKUBI = #{record.tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kousinnbi != null">
+        KOUSINNBI = #{record.kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update syain_rireki
+    set SYAIN_ID = #{record.syainId,jdbcType=INTEGER},
+      KAISIBI = #{record.kaisibi,jdbcType=DATE},
+      SYURYOBI = #{record.syuryobi,jdbcType=DATE},
+      KAISYA_NAME = #{record.kaisyaName,jdbcType=VARCHAR},
+      BUSYO = #{record.busyo,jdbcType=VARCHAR},
+      TOUROKUBI = #{record.tourokubi,jdbcType=TIMESTAMP},
+      KOUSINNBI = #{record.kousinnbi,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.model.SyainRireki">
+    update syain_rireki
+    <set>
+      <if test="syuryobi != null">
+        SYURYOBI = #{syuryobi,jdbcType=DATE},
+      </if>
+      <if test="kaisyaName != null">
+        KAISYA_NAME = #{kaisyaName,jdbcType=VARCHAR},
+      </if>
+      <if test="busyo != null">
+        BUSYO = #{busyo,jdbcType=VARCHAR},
+      </if>
+      <if test="tourokubi != null">
+        TOUROKUBI = #{tourokubi,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kousinnbi != null">
+        KOUSINNBI = #{kousinnbi,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.model.SyainRireki">
+    update syain_rireki
+    set SYURYOBI = #{syuryobi,jdbcType=DATE},
+      KAISYA_NAME = #{kaisyaName,jdbcType=VARCHAR},
+      BUSYO = #{busyo,jdbcType=VARCHAR},
+      TOUROKUBI = #{tourokubi,jdbcType=TIMESTAMP},
+      KOUSINNBI = #{kousinnbi,jdbcType=TIMESTAMP}
+    where SYAIN_ID = #{syainId,jdbcType=INTEGER}
+      and KAISIBI = #{kaisibi,jdbcType=DATE}
+  </update>
+</mapper>
